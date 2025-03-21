@@ -16,4 +16,4 @@ def evaluate_model(y_test, y_pred, model_name):
     plt.title(f"Confusion Matrix: {model_name}")
     plt.xlabel('Predicted')
     plt.ylabel('Actual')
-    plt.show(block=False)
+    plt.show()#block=False)

@@ -2,7 +2,9 @@ from ucimlrepo import fetch_ucirepo
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder, StandardScaler
-
+from sklearn.model_selection import learning_curve
+import numpy as np
+import matplotlib.pyplot as plt
 
 def load_and_preprocess_data():
     # Fetch dataset
@@ -34,6 +36,25 @@ def load_and_preprocess_data():
 
     return X_train, X_test, y_train, y_test, X.columns.tolist()
   
+
+def plot_learning_curve(estimator, X, y, title, cv=5, n_jobs=None):
+    train_sizes, train_scores, test_scores = learning_curve(
+        estimator, X, y, cv=cv, n_jobs=n_jobs, train_sizes=np.linspace(0.1, 1.0, 10), scoring='accuracy'
+    )
+    
+    train_scores_mean = np.mean(train_scores, axis=1)
+    test_scores_mean = np.mean(test_scores, axis=1)
+
+    plt.figure(figsize=(8, 6))
+    plt.plot(train_sizes, train_scores_mean, 'o-', color="r", label="Training Accuracy")
+    plt.plot(train_sizes, test_scores_mean, 'o-', color="g", label="Testing Accuracy")
+    plt.title(f"Learning Curve - {title}")
+    plt.xlabel("Training Set Size")
+    plt.ylabel("Accuracy")
+    plt.legend(loc="best")
+    plt.grid()
+    plt.show()#block=False)
+
 # # metadata 
 # print(phiusiil_phishing_url_website.metadata) 
   
