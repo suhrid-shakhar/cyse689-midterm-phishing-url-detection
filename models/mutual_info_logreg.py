@@ -6,7 +6,7 @@ def mutual_info_logistic_regression(X_train, y_train, X_test):
     X_train_new = selector.fit_transform(X_train, y_train)
     X_test_new = selector.transform(X_test)
     
-    model = LogisticRegression(max_iter=1000)
+    model = LogisticRegression(max_iter=1000, random_state=42)
     model.fit(X_train_new, y_train)
     y_pred = model.predict(X_test_new)
     return model, y_pred, selector.get_support(indices=True)
